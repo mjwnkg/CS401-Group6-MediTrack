@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MediTrack - Dashboard</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <h1>Today’s Schedule</h1>
+
+  <p><a th:href="@{/medications/new}">Add medication</a></p>
+
+  <table border="1" cellpadding="6" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Medication</th>
+        <th>Status</th>
+        <th>Log</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:if="${#lists.isEmpty(doses)}">
+        <td colspan="4">No doses scheduled for today.</td>
+      </tr>
+
+      <tr th:each="d : ${doses}">
+        <td th:text="${d.scheduledTime}"></td>
+        <td th:text="${d.medication.name}"></td>
+        <td th:text="${d.status}"></td>
+        <td>
+    <span th:if="${d.status.name() != 'PENDING'}">Logged</span>
+
+    <div th:if="${d.status.name() == 'PENDING'}">
+        <form method="post" th:action="@{'/doses/' + ${d.id} + '/taken'}" style="display:inline">
+            <button type="submit">Taken</button>
+                </form>
+                    <form method="post" th:action="@{'/doses/' + ${d.id} + '/skipped'}" style="display:inline">
+                    <button type="submit">Skipped</button>
+                </form>
+            </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

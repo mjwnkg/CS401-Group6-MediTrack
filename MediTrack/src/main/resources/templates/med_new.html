@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Add Medication</title>
+</head>
+<body>
+  <h1>Add Medication</h1>
+
+  <p style="color:red" th:if="${error}" th:text="${error}"></p>
+
+  <form method="post" th:action="@{/medications}">
+    <div>
+      <label>Name:</label>
+      <input name="name" required>
+    </div>
+
+    <div>
+      <label>Dosage:</label>
+      <input name="dosage" placeholder="ex: 10 mg">
+    </div>
+
+    <div>
+      <label>Instructions:</label>
+      <input name="instructions" placeholder="ex: with food">
+    </div>
+
+    <div>
+      <label>Times (comma-separated HH:MM):</label>
+      <input name="times" placeholder="08:00,20:00" required>
+    </div>
+
+    <button type="submit">Save</button>
+  </form>
+
+  <p><a th:href="@{/}">Back to dashboard</a></p>
+</body>
+</html>
