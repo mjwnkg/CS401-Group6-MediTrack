@@ -1,0 +1,7 @@
+body { background: rgba(255, 255, 255, 0.815); font-family: Arial, sans-serif; margin: 24px; }
+h1 { margin-bottom: 8px; }
+table { border-collapse: collapse; width: 700px; max-width: 100%; }
+th, td { border: 1px solid #000000; padding: 10px; text-align: left; }
+th { background: #c47171; }
+a { text-decoration: none; }
+button { padding: 6px 10px; cursor: pointer; }
