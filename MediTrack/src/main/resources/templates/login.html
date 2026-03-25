@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MediTrack – Login</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .auth-box { max-width: 360px; margin: 80px auto; padding: 32px; border: 1px solid #ccc; border-radius: 8px; }
+    .auth-box h2 { margin-bottom: 20px; }
+    .auth-box div { margin-bottom: 14px; }
+    .auth-box label { display: block; margin-bottom: 4px; font-size: 14px; }
+    .auth-box input[type=text], .auth-box input[type=password] { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+    .auth-box button { width: 100%; padding: 10px; background: #c47171; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 15px; }
+    .msg-error  { color: #a00; margin-bottom: 12px; font-size: 14px; }
+    .msg-success { color: #060; margin-bottom: 12px; font-size: 14px; }
+    .auth-link  { text-align: center; margin-top: 14px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="auth-box">
+    <h2>MediTrack Login</h2>
+
+    <p class="msg-error"   th:if="${error}"   th:text="${error}"></p>
+    <p class="msg-success" th:if="${message}" th:text="${message}"></p>
+
+    <form method="post" th:action="@{/login}">
+      <div>
+        <label for="username">Username</label>
+        <input id="username" type="text" name="username" required autofocus>
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" required>
+      </div>
+      <button type="submit">Log In</button>
+    </form>
+
+    <p class="auth-link">No account? <a th:href="@{/register}">Register here</a></p>
+  </div>
+</body>
+</html>

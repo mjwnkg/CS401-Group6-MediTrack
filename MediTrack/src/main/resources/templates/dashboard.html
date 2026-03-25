@@ -4,9 +4,23 @@
   <meta charset="utf-8">
   <title>MediTrack - Dashboard</title>
   <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .topbar span { font-size: 14px; color: #555; }
+    .logout-btn { padding: 6px 14px; background: #c47171; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+  </style>
 </head>
 <body>
-  <h1>Today’s Schedule</h1>
+  <div class="topbar">
+    <h1 style="margin:0">Today's Schedule</h1>
+    <div>
+      <span th:text="'Logged in as: ' + ${session.loggedInUser}"></span>
+      &nbsp;
+      <form method="post" th:action="@{/logout}" style="display:inline">
+        <button class="logout-btn" type="submit">Log out</button>
+      </form>
+    </div>
+  </div>
 
   <p><a th:href="@{/medications/new}">Add medication</a></p>
 
@@ -29,16 +43,15 @@
         <td th:text="${d.medication.name}"></td>
         <td th:text="${d.status}"></td>
         <td>
-    <span th:if="${d.status.name() != 'PENDING'}">Logged</span>
-
-    <div th:if="${d.status.name() == 'PENDING'}">
-        <form method="post" th:action="@{'/doses/' + ${d.id} + '/taken'}" style="display:inline">
-            <button type="submit">Taken</button>
-                </form>
-                    <form method="post" th:action="@{'/doses/' + ${d.id} + '/skipped'}" style="display:inline">
-                    <button type="submit">Skipped</button>
-                </form>
-            </div>
+          <span th:if="${d.status.name() != 'PENDING'}">Logged</span>
+          <div th:if="${d.status.name() == 'PENDING'}">
+            <form method="post" th:action="@{'/doses/' + ${d.id} + '/taken'}" style="display:inline">
+              <button type="submit">Taken</button>
+            </form>
+            <form method="post" th:action="@{'/doses/' + ${d.id} + '/skipped'}" style="display:inline">
+              <button type="submit">Skipped</button>
+            </form>
+          </div>
         </td>
       </tr>
     </tbody>
